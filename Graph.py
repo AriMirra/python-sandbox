@@ -6,15 +6,15 @@ class Graph:
         pass
 
     def addVertex(self, item):  # item can be a string or an instance of something
-        if item is None: 
+        if item is None:
             print("addVertex ==> item is None")
             return
-        else: 
+        else:
             self.vertexes.append(item)
         self.printGraph("addVertex")
 
     def addEdge(self, index_a, index_b):
-        if (index_a or index_b) is None: 
+        if (index_a or index_b) is None:
             print("addEdge ==> index_a or index_b is None")
             return
         else:
@@ -25,22 +25,21 @@ class Graph:
         if index is None:
             print("deleteVertex ==> index is None")
             return
-        elif self.vertexes[index] is None: 
+        elif self.vertexes[index] is None:
             print("deleteVertex ==> vertex does not exist")
             return
-        else: 
+        else:
             self.vertexes.remove(index)
             for i in self.edges:
                 if (self.edges[i][0] or self.edges[i][1]) == index:
                     self.edges.remove(i)
         self.printGraph("deleteVertex")
 
-
     def deleteEdge(self, index_a, index_b):
         self.printGraph("deleteEdge")
-    
+
     def getVertexPosition(self, object):
-        if object is None: 
+        if object is None:
             print('getVertexPosition ==> object is None')
             return -1
         for i in self.vertexes:
@@ -49,7 +48,7 @@ class Graph:
                 return i
         self.printGraph("getVertexPosition")
         return -1
-        
+
     def printGraph(self, message):
         print(message + " ==> Vertexes: " + str(self.vertexes) + ", edges: " + str(self.edges))
 
@@ -57,6 +56,7 @@ class Graph:
     #     pass
     # def addVertex(self):
     #     pass
+
 
 graph = Graph()
 graph.addVertex("a")
