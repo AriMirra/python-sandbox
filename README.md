@@ -1,2 +1,2 @@
 # python-sandbox
-### Python exercises for learning purposes
+Python exercises for learning purposes
