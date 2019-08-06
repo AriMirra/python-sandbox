@@ -5,23 +5,23 @@ class Graph:
     def __init__(self):
         pass
 
-    def addVertex(self, item):  # item can be a string or an instance of something
+    def add_vertex(self, item):  # item can be a string or an instance of something
         if item is None:
             print("addVertex ==> item is None")
             return
         else:
             self.vertexes.append(item)
-        self.printGraph("addVertex")
+        self.print_graph("addVertex")
 
-    def addEdge(self, index_a, index_b):
+    def add_edge(self, index_a, index_b):
         if (index_a or index_b) is None:
             print("addEdge ==> index_a or index_b is None")
             return
         else:
             self.edges.append([index_a, index_b])
-        self.printGraph("addEdge")
+        self.print_graph("addEdge")
 
-    def deleteVertex(self, index):
+    def delete_vertex(self, index):
         if index is None:
             print("deleteVertex ==> index is None")
             return
@@ -33,23 +33,23 @@ class Graph:
             for i in self.edges:
                 if (self.edges[i][0] or self.edges[i][1]) == index:
                     self.edges.remove(i)
-        self.printGraph("deleteVertex")
+        self.print_graph("deleteVertex")
 
-    def deleteEdge(self, index_a, index_b):
-        self.printGraph("deleteEdge")
+    def delete_edge(self, index_a, index_b):
+        self.print_graph("deleteEdge")
 
-    def getVertexPosition(self, object):
-        if object is None:
-            print('getVertexPosition ==> object is None')
+    def get_vertex_position(self, object_):
+        if object_ is None:
+            print('getVertexPosition ==> object_ is None')
             return -1
         for i in self.vertexes:
-            if self.vertexes[i] == object:
-                graph.printGraph()
+            if self.vertexes[i] == object_:
+                graph.print_graph('')
                 return i
-        self.printGraph("getVertexPosition")
+        self.print_graph("getVertexPosition")
         return -1
 
-    def printGraph(self, message):
+    def print_graph(self, message):
         print(message + " ==> Vertexes: " + str(self.vertexes) + ", edges: " + str(self.edges))
 
     # def addVertex(self):
@@ -59,11 +59,11 @@ class Graph:
 
 
 graph = Graph()
-graph.addVertex("a")
-graph.addVertex("b")
-graph.addVertex("c")
-graph.addVertex("d")
-graph.addEdge(0, 1)
-graph.addEdge(1, 2)
-graph.addEdge(2, 3)
-graph.addEdge(3, 0)
+graph.add_vertex("a")
+graph.add_vertex("b")
+graph.add_vertex("c")
+graph.add_vertex("d")
+graph.add_edge(0, 1)
+graph.add_edge(1, 2)
+graph.add_edge(2, 3)
+graph.add_edge(3, 0)
