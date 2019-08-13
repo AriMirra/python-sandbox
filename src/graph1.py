@@ -1,4 +1,4 @@
-class Graph:
+class Graph1:
     vertexes = []
     edges = [[]]
 
@@ -58,7 +58,7 @@ class Graph:
     #     pass
 
 
-graph = Graph()
+graph = Graph1()
 graph.add_vertex("a")
 graph.add_vertex("b")
 graph.add_vertex("c")
