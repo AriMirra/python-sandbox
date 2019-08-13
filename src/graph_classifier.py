@@ -9,5 +9,25 @@ a graph and classify it as:
 - simple directed, simple undirected, multi
 - ...
 """
-def classify_graph(graph):
+
+
+def edge_exists(graph, v, w):
     pass
+
+
+def path_exists(graph, v, w, *args, **kwargs):
+    visited = kwargs.get('visited',  [False] * len(graph.vertexes))
+    if v == w or edge_exists(graph, v, w):
+        return True
+
+    visited[v] = True
+    adjacent = graph.get_adjacent(v)
+    if len(adjacent) == 0:
+        return False
+
+    i = 0
+    for a in adjacent:
+        if not visited[i] and path_exists(graph, adjacent[i], w, visited=visited):
+            return True
+
+    return False

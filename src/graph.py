@@ -1,6 +1,6 @@
 class Graph:
     vertexes = []
-    edges = []
+    edges = [[]]
 
     def __init__(self):
         pass
@@ -30,7 +30,7 @@ class Graph:
             return
         else:
             self.vertexes.remove(index)
-            for i in self.edges:
+            for i in range(len(self.edges)):
                 if (self.edges[i][0] or self.edges[i][1]) == index:
                     self.edges.remove(i)
         self.print_graph("deleteVertex")
