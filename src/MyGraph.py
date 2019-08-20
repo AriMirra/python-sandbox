@@ -1,4 +1,4 @@
-import src.Graph
+from Graph import Graph
 """
 Graph class implementation
 """
