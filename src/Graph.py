@@ -37,4 +37,3 @@ class Graph(abc.ABC):
     @abc.abstractmethod
     def get_adjacent_list(self, v):
         pass
-

@@ -6,8 +6,8 @@ data = [['a', 1, 1], ['b', 3, 2]]
 for item in data:
     plt.plot(item, 'ro-')
 plt.show()
-import matplotlib.pyplot as plt
 from graph import Graph
+
 
 def plot_graph(graph):
     """
@@ -20,6 +20,7 @@ def plot_graph(graph):
     for i in range(0, len(graph.edges)):
         pass
     plt.show()
+
 
 graph_demo = Graph()
 graph_demo.add_vertex("Hay")
@@ -44,11 +45,11 @@ def get_adjacent(graph, index):
 
 # Especificar y escribir algoritmos para resolver los siguientes problemas. 
 # Considerar que el grafo es simple y puede tener lazos. Calcular O grande. 
-# a)Mostrar el grafo.  
+# a)Mostrar el grafo.
 def show_graph(graph):
     # beginner: prints, advanced: matplotlib B)
     pass
-# b)Retornar la cantidad de lazos de un grafo. 
+# b)Retornar la cantidad de lazos de un grafo.
 def tie_quantity(graph):
     """check for"""
     for i in range(0, graph.size()):

@@ -20,7 +20,8 @@ will be directed in one side, if both have reciprocal
 connection between each other, will be non directed.
 
 """
-from graph import MyGraph
+from src.MyGraph import MyGraph
+
 
 def adjacency_matrix(graph):
     matrix = []
@@ -43,9 +44,11 @@ def adjacency_matrix(graph):
         matrix.append(row)
     return matrix
 
+
 def incidency_matrix(graph):
     # exists but not really important
     pass
+
 
 # matrix test
 if __name__ == "__main__":
