@@ -1,4 +1,5 @@
-from src.Graph import Graph
+# from src.Graph import Graph  # idea
+from Graph import Graph
 
 """
 Graph class implementation
@@ -7,22 +8,36 @@ Graph class implementation
 
 class MyGraph(Graph):
 
-    def get_adjacent_list(self, v):
-        pass
-
-    def __init__(self):
+    def __init__(self, directed=False):
         self.graph = {}
+        self.directed = directed
 
     def add_vertex(self, v):
         if v is None:
             return False
-        self.graph[v] = []
+        for key in self.graph.keys():
+            self.graph[key].extend([0])
+        self.graph[v] = [0] * (len(self.graph) + 1)
         return True
 
     def add_edge(self, v, w):
         if v is None or w is None:
             return False
-        self.graph[v].append(w)
+        vertexes = list(self.graph.keys())
+        v_exists = False
+        w_exists = False
+        if self.directed:  # add only when matching
+            for vertex in vertexes:
+                if vertex is v:
+                    v_exists = True
+                    for i in range(0, len(vertexes)):
+                        if vertexes[i] is w:
+                            self.graph[v][i] = 1
+                            w_exists = True
+            if not v_exists or not w_exists:
+                raise ValueError("v does not exists in graph")
+        else:  # 1 edge means 2 in reality 
+            pass
         return True
 
     def delete_vertex(self, v):
@@ -74,3 +89,25 @@ class MyGraph(Graph):
 
     def get_vertexes_list(self):
         return list(self.graph.keys())
+
+    def print_graph(self):
+        print(self.graph)
+
+    def get_adjacent_list(self, v):
+        pass
+
+
+# test
+if __name__ == "__main__":
+    # demo_graph = MyGraph(True)
+    # demo_graph.add_vertex("a")
+    # demo_graph.print_graph()
+    # demo_graph.add_vertex("b")
+    # demo_graph.print_graph()
+    # demo_graph.add_vertex("c")
+    # demo_graph.print_graph()
+    # demo_graph.add_edge("a", "b")
+    # demo_graph.print_graph()
+    # demo_graph.add_edge("c", "b")
+    # demo_graph.print_graph()
+    pass
