@@ -5,19 +5,22 @@ public class DirectedGraph implements Graph {
     private List<String> vertexes;
     private List<Edge> edges;
 
-    public DirectedGraph(List<String> vertexes, List<Edge> edges) {
+    DirectedGraph(List<String> vertexes, List<Edge> edges) {
         this.vertexes = vertexes;
         this.edges = edges;
     }
 
+    @Override
     public void addVertex(String v) {
         vertexes.add(v);
     }
 
+    @Override
     public void addEdge(Edge e) {
         edges.add(e);
     }
 
+    @Override
     public void deleteVertex(String v) {
         int index = vertexes.indexOf(v);
         edges = edges.stream()
@@ -26,14 +29,17 @@ public class DirectedGraph implements Graph {
         vertexes.remove(v);
     }
 
+    @Override
     public void deleteEdge(Edge e) {
         edges.remove(e);
     }
 
+    @Override
     public boolean edgeExists(int v, int w) {
         return edges.contains(new Edge(v, w));
     }
 
+    @Override
     public List<Integer> getAdjacentList(int v) {
         ArrayList<Integer> result = new ArrayList<>(vertexes.size());
         for (Edge e : edges) {
@@ -46,13 +52,13 @@ public class DirectedGraph implements Graph {
         // TODO: ask Alicia
         int fromIndex = vertexes.indexOf(from);
         int toIndex = vertexes.indexOf(to);
-        for (Edge e: edges) {
+        for (Edge e : edges) {
 
         }
         return false;
     }
 
-    public boolean DFS(String from, String to) {
+    boolean DFS(String from, String to) {
         HashSet<Integer> visited = new HashSet<>();
         int fromIndex = vertexes.indexOf(from);
         int toIndex = vertexes.indexOf(to);
@@ -65,17 +71,17 @@ public class DirectedGraph implements Graph {
         visited.add(from);
         Set<Integer> children = getChildren(from);
         for (int v : children) {
-            hasPathDFS(v, to, visited);
+            return hasPathDFS(v, to, visited);
         }
         return false;
     }
 
-    public boolean BFS(String from, String to) {
+    boolean BFS(String from, String to) {
         LinkedList<Integer> nextToVisit = new LinkedList<>();
         HashSet<Integer> visited = new HashSet<>();
         int fromIndex = vertexes.indexOf(from);
         nextToVisit.add(fromIndex);
-        while(!nextToVisit.isEmpty()) {
+        while (!nextToVisit.isEmpty()) {
             int v = nextToVisit.remove();
             if (vertexes.get(v).equals(to)) return true;
             if (visited.contains(v)) continue;
@@ -92,4 +98,38 @@ public class DirectedGraph implements Graph {
                 .collect(Collectors.toSet());
     }
 
+    static DirectedGraph randomGraph(int vertexNameLength, int vertexAmount, int edgesAmount) {
+        if (vertexAmount > 26) vertexAmount = 26;
+        List<String> vs = getRandomStrings(vertexNameLength, vertexAmount);
+        List<Edge> edges = getRandomEdges(vs, edgesAmount);
+        return new DirectedGraph(vs, edges);
+    }
+
+    private static List<String> getRandomStrings(int length, int amount) {
+        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        Set<String> strings = new HashSet<>();
+        while (strings.size() < amount) {
+            StringBuilder sb = new StringBuilder(length);
+            for (int i = 0; i < length; i++) {
+                int index = (int) (alphabet.length() * Math.random());
+                sb.append(alphabet.charAt(index));
+            }
+            strings.add(sb.toString());
+        }
+        return new ArrayList<>(strings);
+    }
+
+    private static List<Edge> getRandomEdges(List<String> vs, int amount) {
+        if (amount > vs.size()) amount = vs.size() - 1;
+        Random r = new Random();
+        int length = vs.size();
+        Set<Edge> edges = new HashSet<>();
+        while (edges.size() < amount) {
+            int v1 = r.nextInt(length);
+            int v2 = r.nextInt(length);
+            if (v1 == v2) continue;
+            edges.add(new Edge(v1, v2));
+        }
+        return new ArrayList<>(edges);
+    }
 }
