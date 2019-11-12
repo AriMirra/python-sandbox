@@ -91,6 +91,22 @@ public class DirectedGraph implements Graph {
         return false;
     }
 
+    int bfsCount(String from, String to, HashSet<Integer> visited) {
+        LinkedList<Integer> nextToVisit = new LinkedList<>();
+        int count = 0;
+        int fromIndex = vertexes.indexOf(from);
+        nextToVisit.add(fromIndex);
+        while (!nextToVisit.isEmpty()) {
+            int v = nextToVisit.remove();
+            if (vertexes.get(v).equals(to)) return count;
+            else count++;
+            if (visited.contains(v)) continue;
+            visited.add(v);
+            nextToVisit.addAll(getChildren(v));
+        }
+        return -1;
+    }
+
     private Set<Integer> getChildren(int i) {
         return edges.stream()
                 .filter(e -> e.from == i)
@@ -132,4 +148,45 @@ public class DirectedGraph implements Graph {
         }
         return new ArrayList<>(edges);
     }
+
+    void fleury() {
+        int startingIndex = 0;
+        for (int i = 0; i < vertexes.size(); i++) {
+            if (getAdjacentList(startingIndex).size() % 2 == 1) {
+                startingIndex = i;
+                break;
+            }
+        }
+
+        printEulerUtil(startingIndex);
+        System.out.println();
+    }
+
+    private void printEulerUtil(Integer u) {
+        for (int i = 0; i < getAdjacentList(u).size(); i++) {
+            Integer v = getAdjacentList(u).get(i);
+            if (isValidNextEdge(u, v)) {
+                System.out.print(u + "->" + v + "  ");
+                deleteEdge(new Edge(u, v));
+                printEulerUtil(v);
+            }
+        }
+    }
+
+    private boolean isValidNextEdge(Integer u, Integer v) {
+        if (getAdjacentList(u).size() == 1) {
+            return true;
+        }
+
+        HashSet<Integer> isVisited = new HashSet<>(vertexes.size());
+        int count1 = bfsCount(vertexes.get(0), vertexes.get(u), isVisited);
+
+        deleteEdge(new Edge(u, v));
+        isVisited = new HashSet<>(vertexes.size());
+        int count2 = bfsCount(vertexes.get(0), vertexes.get(u), isVisited);
+
+        addEdge(new Edge(u, v));
+        return count1 <= count2;
+    }
+
 }

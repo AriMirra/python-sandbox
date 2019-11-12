@@ -14,7 +14,7 @@ public interface Graph {
         @Override
         public boolean equals(Object obj) {
             Edge e = (Edge) obj;
-            System.out.println("comparing:" + this + " to " + e);
+//            System.out.println("comparing:" + this + " to " + e);
             return e.from == this.from && e.to == this.to;
         }
 

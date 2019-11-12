@@ -27,6 +27,23 @@ public class GraphTest {
         return new DirectedGraph(vertexes, edges);
     }
 
+    private static DirectedGraph initEulerian() {
+        List<String> vertexes = new ArrayList<>();
+        vertexes.add("A");
+        vertexes.add("B");
+        vertexes.add("C");
+        vertexes.add("D");
+
+        List<Graph.Edge> edges = new ArrayList<>();
+        edges.add(new Graph.Edge(0, 1));
+        edges.add(new Graph.Edge(0, 2));
+        edges.add(new Graph.Edge(1, 2));
+        edges.add(new Graph.Edge(1, 3));
+        edges.add(new Graph.Edge(2, 3));
+
+        return new DirectedGraph(vertexes, edges);
+    }
+
     @Test
     public void deleteVertexTest() {
         DirectedGraph g = init();
@@ -61,5 +78,10 @@ public class GraphTest {
     public void randomGraphTest() {
         DirectedGraph g = DirectedGraph.randomGraph(1,4,6);
         System.out.println("test");
+    }
+
+    @Test
+    public void fleuryTest() {
+        initEulerian().fleury();
     }
 }
